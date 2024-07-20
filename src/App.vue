@@ -1,43 +1,14 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
-
-import { Input } from './components/ui/input'
+import Sidebar from './components/ui/layout/Sidebar.vue'
+import TopNavBar from './components/ui/layout/TopNavBar.vue'
 </script>
 
 <template>
-  <nav class="h-16 border-b bg-muted/40 flex justify-between px-6 items-center">
-    <form class="relative w-full h-fit max-w-96">
-      <iconify-icon
-        icon="lucide:search"
-        class="absolute top-[50%] translate-y-[-50%] left-2.5 text-muted-foreground"
-      ></iconify-icon>
-      <Input type="text" placeholder="Search..." class="w-full bg-background pl-8" />
-    </form>
-
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        ><Avatar>
-          <AvatarImage src="https://github.com/radix-vue.png" alt="@radix-vue" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar></DropdownMenuTrigger
-      >
-      <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  </nav>
-  <main><RouterView /></main>
+  <Sidebar />
+  <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
+    <TopNavBar />
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
