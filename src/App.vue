@@ -14,7 +14,11 @@ import { Input } from './components/ui/input'
 
 <template>
   <nav class="h-16 border-b bg-muted/40 flex justify-between px-6 items-center">
-    <form class="w-full max-w-96">
+    <form class="relative w-full h-fit max-w-96">
+      <iconify-icon
+        icon="lucide:search"
+        class="absolute top-[50%] translate-y-[-50%] left-2.5 text-muted-foreground"
+      ></iconify-icon>
       <Input type="text" placeholder="Search..." class="w-full bg-background pl-8" />
     </form>
 
