@@ -23,7 +23,7 @@ const columns: ColumnDef<Tables<'projects'>>[] = [
           to: `/projects/${row.original.slug}`,
           class: 'text-left font-medium hover:bg-muted block w-full'
         },
-        row.getValue('name')
+        () => row.getValue('name')
       )
     }
   },
