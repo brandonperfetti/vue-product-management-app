@@ -13,6 +13,8 @@
     "format": "prettier --write src/",
     "supabase:init": "supabase init",
     "supabase:login": "supabase login",
+    "supabase:link": "supabase link --project-ref ngtaxvpshxltkpawzmqf",
+    "supabase:types": "npx supabase gen types typescript --project-id ngtaxvpshxltkpawzmqf --schema public > database/types.ts",
     "db:migrate:new": "supabase migration new",
     "db:reset": "supabase db reset --linked",
     "db:seed": "node --env-file=.env database/seed.js"
@@ -50,6 +52,7 @@
     "tailwindcss": "^3.4.6",
     "typescript": "~5.4.0",
     "unplugin-auto-import": "^0.18.2",
+    "unplugin-vue-components": "^0.27.4",
     "unplugin-vue-router": "^0.10.1",
     "vite": "^5.3.1",
     "vue-tsc": "^2.0.21"
