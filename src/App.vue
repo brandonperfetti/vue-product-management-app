@@ -2,8 +2,13 @@
 
 <template>
   <AuthLayout>
-    <Suspense>
-      <RouterView />
-    </Suspense>
+    <RouterView v-slot="{ Component, route }">
+      <Suspense v-if="Component">
+        <Component :is="Component" key="route.name" />
+        <template #fallback>
+          <span>Loading...</span>
+        </template>
+      </Suspense>
+    </RouterView>
   </AuthLayout>
 </template>
