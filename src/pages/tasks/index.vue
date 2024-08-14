@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { supabase } from '@/lib/supabaseClient'
+import type { QueryData } from '@supabase/supabase-js'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
-import type { Tables } from '../../../database/types'
 
 usePageStore().pageData.title = 'My Tasks'
 
-const tasks = ref<Tables<'tasks'>[] | null>(null)
+const tasksWithProjectsQuery = supabase.from('tasks').select(`*, projects (id,name,slug)`)
+type TasksWithProjects = QueryData<typeof tasksWithProjectsQuery>
+
+const tasks = ref<TasksWithProjects | null>(null)
 const getTasks = async () => {
   const { data, error } = await supabase.from('tasks').select(`*, projects (id,name,slug)`)
   if (error) console.error(error)
@@ -14,7 +17,7 @@ const getTasks = async () => {
 }
 await getTasks()
 
-const columns: ColumnDef<Tables<'tasks'>>[] = [
+const columns: ColumnDef<TasksWithProjects[0]>[] = [
   {
     accessorKey: 'name',
     header: () => h('div', { class: 'text-left' }, 'Name'),
@@ -50,12 +53,10 @@ const columns: ColumnDef<Tables<'tasks'>>[] = [
       return h(
         RouterLink,
         {
-          // @ts-ignore
-          to: `/tasks/${row.original.projects.slug}`,
+          to: `/tasks/${row.original.projects?.slug}`,
           class: 'text-left font-medium hover:bg-muted block w-full'
         },
-        // @ts-ignore
-        () => row.getValue('projects').name
+        () => row.original.projects?.name
       )
     }
   },
