@@ -1,8 +1,9 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <AuthLayout>
-    <RouterView />
+    <Suspense>
+      <RouterView />
+    </Suspense>
   </AuthLayout>
 </template>
